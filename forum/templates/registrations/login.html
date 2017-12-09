@@ -1,0 +1,47 @@
+{% load staticfiles %}
+
+<html>
+	<head>
+		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+		<script src = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+		
+		<title>Django Store - Login</title>
+	</head>
+	<body>
+		<div class="ui two column centered grid">
+			<div class="container">
+					<div class="ui segment"  id="container_whole">
+						<div class ="container2">
+							<div class="row">
+								<h1>Log In</h1>
+								{% if form.has_errors %}
+									<h5>Your username and password didn't match. Please try again.</h5>
+								{% endif %}
+							</div>
+							<form method="post" action=".">
+								{% csrf_token %}
+								<br>
+								<label for="id_username">Username:</label>
+								<div class="ui input focus">
+									{{ form.username }}
+								</div><br><br>
+								<label for="id_password">Password:</label>
+								<div class="ui input focus">
+									{{ form.password }}
+								</div>
+								<input type="hidden" name="next" value="/" /><br><br>
+								<div class="row" align="center">
+									<button class="ui button"type="submit" value="login">Log In</button>
+								</div><br>
+								<div class="row" align="center">
+									<a class="ui inverted red button" href="{% url 'register' %}">Sign Up Here!</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <head>
+		<Title>Django Store - Home</Title>
+	</head>
+    <div class="container ui segment" style="width: 90%;">
+        <h1>Welcome to Django Store</h1>
+    </div>
+    <div class="container ui segment" style="width: 90%;">
+        {% if posts %}
+            {% for x in posts %}
+                <h2>
+                    <a href="/home/{{x.id}}/">{{x.title}}</a>
+                </h2>
+                <h10 style="font-style: oblique;">by:{{x.poster}}</h10>
+                <h5>{{x.content|linebreaks}}</h5>
+                <div class="ui divider"></div>
+            {% endfor %}
+        {% else %}
+            <h3 style="font-style: oblique;">No post yet :(</h3>
+        {% endif %}
+    </div>
+{% endblock %}

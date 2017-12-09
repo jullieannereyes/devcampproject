@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<head>
+		<title>Create New Post</title>
+	</head>
+	<body>
+		<div class="container ui segment" style="width: 90%;">
+			<h1>Create Post</h1>
+		</div>
+		<div class="container ui segment" style="width: 90%;">
+			<form method="post" action="{% url 'save_post' %}">
+				{% csrf_token %}
+				<div class="ui form">
+					<div class="field">
+						<h4><label for="title">Title:</label></h4>
+						<input type="text" name="title" id="title" placeholder="Title">
+					</div>
+					<div class="field">
+						<label for="content">Content</label>
+						<textarea rows="100" max="1000" placeholder="Enter content..." id="content" name="content" required id="id_content"></textarea>
+					</div>
+					<button class="ui button" type="submit" value="submit_comment">Submit</button>
+				</div>
+			</form>
+		</div>
+	</body>
+{% endblock %}

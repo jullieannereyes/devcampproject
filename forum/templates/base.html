@@ -1,0 +1,58 @@
+{% load staticfiles %}
+
+<html>
+	<head>
+		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+		<script src = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+		{% block extrastyles %}
+		{% endblock %}
+	</head>
+	
+	<body>
+		<div class="ui secondary pointing menu" id="navbar">
+			<div class ="item">
+				<a class="navbar-brand" href="/">
+					<img src="{% static 'images/icon.png' %}" width="25px" height="25px">
+				</a>
+			</div>
+			<a class="item" href="/" id="menuitem1">
+				Home
+			</a>
+			<a class="item" href="/myposts/" id="menuitem2">
+				My Posts
+			</a>
+			<a class="item" href="/myaccount/" id="menuitem3">
+				My Account
+			</a>
+			<div class="right menu">
+				<div class="item" id="searchbox">
+					<form method="post" action="{% url 'searchpost' %}">
+						{% csrf_token %}
+						<div class="ui icon input">
+							<input type="text" placeholder="Search post..." id="substring" name="substring">
+							<button class="ui button" type="submit" value="search_post" id="button">
+								<i class="circular search link icon"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+				<div id="loginout">
+					{% if user.username %}
+						<a class="ui item" href="{% url 'logout' %}">
+							Logout
+						</a>
+					{% else %}
+						<a class="ui item" href="{% url 'login' %}">
+							Login
+						</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class ="main">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</body>
+</html>

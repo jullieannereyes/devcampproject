@@ -1,0 +1,9 @@
+{% include "base.html" %}
+{% block title %}Post{% endblock %}
+{% block content %}
+	<ul>
+	{% for post in forum %}
+	<li><a href="{% url 'viewpost' post.id %}" ><strong>{{ post.title }}</strong></a><br> Posted by : {{ post.poster}} <br>{{ post.date_posted }} <br></li>
+	{% endfor %}
+	</ul>
+{% endblock %}

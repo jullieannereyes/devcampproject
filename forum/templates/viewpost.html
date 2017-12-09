@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+	<Title>View a Post - {{post.title}}</Title>
+</head>
+	<div class="container ui segment" style="width: 90%;">
+        <h2>{{post.title}}<br><h2>
+		<div class="ui divider"></div>
+		<h5 style="text-align: justify;">{{post.content|linebreaks}}</h5>
+	</div>
+	<div class="container ui segment" style="width: 90%;">
+		<h2>Comments<br><h2>
+		<div class="ui divider"></div>
+		<form action="/home/comment_submitted/" method="post">
+			{% csrf_token %}
+			<input type=hidden value="{{post.id}}" id="pk" name="pk">
+			<div class="ui form">
+				<div class="field">
+					<label for="comment">Write a comment</label>
+					<textarea rows="10" placeholder="Enter comment..." id="comment" name="comment"></textarea>
+				</div>
+				<button class="ui button" type="submit" value="submit_comment">Submit</button>
+			</div>
+		</form>
+		<div class="ui divider"></div>
+		{%for comment in mycomments%}
+			<div class="container ui segment" style="width: 100%;">
+				
+                    <h2>{{comment.poster}}</h2>
+                
+                <a class="ui inverted red button" style="float: right;" href="/home/{{post.id}}/{{comment.id}}/comment_deleted/" name="comment_id" id="comment_id">Delete</a>
+				<h8 style="font-style: italic;">posted on: {{comment.date_posted}}</h8>
+				<h5 style="text-align: justify;">{{comment.content|linebreaks}}</h5>
+			</div>
+		{%endfor%}
+		{%for comment in comments%}
+			<div class="container ui segment" style="width: 100%;">
+				<h2>{{comment.poster}}</h2>
+				<h8 style="font-style: italic;">posted on: {{comment.date_posted}}</h8>
+				<h5>{{comment.content|linebreaks}}</h5>
+			</div>
+		{%endfor%}
+	</div>
+{% endblock %}

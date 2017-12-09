@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <head>
+		<title>Search Post</title>
+	</head>
+	<body>
+		<div class="container ui segment" style="width: 90%;">
+			<h1>Searching post...</h1>
+        </div>
+        <div class="container ui segment" style="width: 90%;">
+            {% if subtitle or subcontent %}
+                {% for x in subtitle %}
+                    <div class="container ui segment" style="width: 100%;">
+                        <h2><a href="/home/{{x.id}}/">{{x.title}}</a></h2
+                        <h8 style="font-style: italic;">posted on: {{x.date_posted}}</h8>
+                        <h5>{{x.content|linebreaks}}</h5>
+                    </div>
+                {% endfor %}
+                {% for x in subcontent %}
+                <div class="container ui segment" style="width: 100%;">
+                    <h2><a href="/home/{{x.id}}/">{{x.title}}</a></h2
+                    <h8 style="font-style: italic;">posted on: {{x.date_posted}}</h8>
+                    <h5>{{x.content|linebreaks}}</h5>
+                </div>
+                {% endfor %}
+            {% elif not subtitle and not subcontent %}
+                <h3 style="font-style: oblique;">No such post :(</h3>
+            {% endif%}
+        </div>
+    </body>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <head>
+        <title>My Posts</title>
+    </head>
+    <div class="container ui segment" style="width: 90%;">
+        <h1 style="display: inline-block;">My Posts</h1>
+        <a class="ui button" style="float: right;" href="/myposts/createPost/">Create Post</a>  
+    </div>
+    <div class="container ui segment" style="width: 90%;">
+        {% if empty == False %}
+            {% for x in posts %}
+                <h2 style="display: inline-block;">
+                    <a href="/home/{{x.id}}">{{x.title}}</a>
+                </h2>
+                <a class="ui inverted red button" style="float: right;" href="/myposts/{{x.id}}/post_deleted/" name="post_id" id="post_id">Delete</a>
+                <h5 style="text-align: justify;">{{x.content|linebreaks}}</h5>
+                <div class="ui divider"></div>
+            {% endfor %}
+        {% else %}
+            <h3 style="font-style: oblique;">No post yet :(</h3>
+        {% endif %}
+    </div>
+{% endblock %}
